@@ -60,7 +60,7 @@ Now, let's expose all endpoints except `/shutdown` by modifying our application.
 ```
 management.endpoints.web.exposure.include=*
 ```
-By default, all endpoints except for `shutdown` are enabled. To configure the enablement of an endpoint, use its `management.endpoint.<id>.enabled` property. The following example enables the `shutdown` endpoint:
+By default, all endpoints except `/shutdown` are enabled. To configure the enablement of an endpoint, use its `management.endpoint.<id>.enabled` property. The following example enables the `shutdown` endpoint:
 ```
 management.endpoint.shutdown.enabled=true
 ```
@@ -104,6 +104,12 @@ Now when we query the `/actuator` endpoint, we should see it listed. The `/shutd
 ```
 curl -X POST http://localhost:8080/actuator/shutdown
 ```
+
+**Moreover, if we want to configure a custom management base path, then we should use that base path as the discovery URL.**
+
+For instance, if we set the `management.endpoints.web.base-path` to `/mgmt`, then we should send a request to the `/mgmt` endpoint to see the list of links.
+
+Quite interestingly, when the management base path is set to /, the discovery endpoint is disabled to prevent the possibility of a clash with other mappings.
 ## Securing Endpoints
 In a real-world application, we're most likely going to have security on our application. With that in mind, let's secure our actuator endpoints.
 

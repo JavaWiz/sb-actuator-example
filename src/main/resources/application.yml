@@ -1,0 +1,33 @@
+server:
+ port: 9000
+ 
+spring:
+  application:
+   name: sb-actuator-example
+
+info:
+  application:
+    name: ${spring.application.name}
+    description: Very cool Spring Boot application
+    version: '@project.version@'
+    spring-cloud-version: '@spring-cloud.version@'
+    spring-boot-version: '@project.parent.version@'
+ 
+
+management:
+ server:
+  port: 9001
+  address: 127.0.0.1
+ endpoints:
+  web:
+   exposure:
+#    include: "*"
+    include: beans, loggers
+   base-path: /mgmt
+
+#management:endpoints:web:base-path=/mgmt
+#management.endpoints.enabled-by-default=false
+#management:endpoint:shutdown:enabled: true
+#management:endpoints:web:exposure:include: health, shutdown
+#management:endpoints:web:exposure:include: beans, loggers
+
